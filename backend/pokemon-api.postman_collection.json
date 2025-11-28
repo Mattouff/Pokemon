@@ -667,38 +667,6 @@
 			"name": "Battles",
 			"item": [
 				{
-					"name": "Start Ghost Battle",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"opponent_id\": 0,\n  \"city\": \"Paris\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/api/battles/ghost",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"battles",
-								"ghost"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Start Ghost Battle Interactive",
 					"request": {
 						"method": "POST",

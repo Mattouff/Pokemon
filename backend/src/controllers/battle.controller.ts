@@ -107,23 +107,6 @@ export class BattleController {
     }
   }
 
-  static async startGhostBattle(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const user = (req as AuthRequest).user!;
-      const data = validateData(createBattleSchema, req.body) as { opponent_id: number };
-      const city = req.body.city as string | undefined;
-      const result = await BattleService.startGhostBattle(user.id, data, city);
-
-      res.status(201).json({
-        success: true,
-        message: 'Combat terminé',
-        data: result,
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-
   static async getBattleHistory(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const user = (req as AuthRequest).user!;
