@@ -1,0 +1,1186 @@
+{
+	"info": {
+		"_postman_id": "9b9a2293-adf2-48c7-8b5c-f1edaac863cc",
+		"name": "Pokémon Battle API",
+		"description": "Collection complète pour tester l'API Pokémon Battle - Auth, Teams, Friends, Battles, Hacks, Weather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19644726"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"ash_ketchum\",\n  \"email\": \"ash@pokemon.com\",\n  \"password\": \"Pikachu123!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"TestFront\",\n  \"password\": \"TesT1234#\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refreshToken\": \"{{refresh_token}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refreshToken\": \"{{refresh_token}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout All Devices",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth/logout-all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout-all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pokemon",
+			"item": [
+				{
+					"name": "List Pokemon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pokemon?limit=20&offset=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pokemon"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pokemon by ID (Pikachu)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pokemon/25",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pokemon",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Pokemon by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pokemon/search?name=charizard",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pokemon",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "charizard"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Create Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Team Électrique\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teams",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Teams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/teams",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Team by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/teams/{{team_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								"{{team_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Team Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Team Champions\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teams/{{team_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								"{{team_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Team",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/teams/{{team_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								"{{team_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Pokemon to Team (Pikachu)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"pokemon_id\": 25,\n  \"position\": 1,\n  \"nickname\": \"Pika\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teams/{{team_id}}/pokemons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								"{{team_id}}",
+								"pokemons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Pokemon from Team",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/teams/{{team_id}}/pokemons/25",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								"{{team_id}}",
+								"pokemons",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Team as Active",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/teams/{{team_id}}/active",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								"{{team_id}}",
+								"active"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friends",
+			"item": [
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/friends/search?q=m",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "m"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Friend Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friend_username\": \"gary_oak\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/friends/requests",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Friends List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/friends",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"friends"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pending Requests",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/friends/requests/pending",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"requests",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept Friend Request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/friends/requests/{{request_id}}/accept",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"requests",
+								"{{request_id}}",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject Friend Request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/friends/requests/{{request_id}}/reject",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"requests",
+								"{{request_id}}",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Friend",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/friends/{{friend_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"{{friend_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Battles",
+			"item": [
+				{
+					"name": "Start Ghost Battle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"opponent_id\": 0,\n  \"city\": \"Paris\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/battles/ghost",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"battles",
+								"ghost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Ghost Battle Interactive",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"opponent_id\": 0,\n  \"city\": \"Paris\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/battles/interactive",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"battles",
+								"interactive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Battle History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/battles/history?limit=20",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"battles",
+								"history"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Battle Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/battles/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"battles",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Battle Interactive",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/battles/interactive/{{battle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"battles",
+								"interactive",
+								"{{battle_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Attack",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"action\": \"attack\",\n  \"move_index\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/battles/interactive/{{battle_id}}/action",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"battles",
+								"interactive",
+								"{{battle_id}}",
+								"action"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stop Combat Surrender",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/battles/interactive/{{battle_id}}/flee",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"battles",
+								"interactive",
+								"{{battle_id}}",
+								"flee"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hacks",
+			"item": [
+				{
+					"name": "Get All Hacks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hacks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"hacks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pending Hacks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hacks/pending",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"hacks",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Hack Solution (Correct)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"battle_hack_id\": 1,\n  \"answer\": \"FEED\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/hacks/submit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"hacks",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Hack Solution (Wrong)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"battle_hack_id\": 1,\n  \"answer\": \"WRONG\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/hacks/submit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"hacks",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hack Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hacks/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"hacks",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Weather",
+			"item": [
+				{
+					"name": "Get Current Weather (Paris)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/weather/current?city=Paris",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"weather",
+								"current"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Paris"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Weather (Tokyo)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/weather/current?city=Tokyo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"weather",
+								"current"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Tokyo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Weather Effects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/weather/effects?city=Paris",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"weather",
+								"effects"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Paris"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Auto-save access_token from login/register responses",
+					"if (pm.response.code === 200 || pm.response.code === 201) {",
+					"    const response = pm.response.json();",
+					"    if (response.data && response.data.tokens) {",
+					"        pm.collectionVariables.set('access_token', response.data.tokens.accessToken);",
+					"        pm.collectionVariables.set('refresh_token', response.data.tokens.refreshToken);",
+					"        console.log('✅ Tokens saved successfully');",
+					"    }",
+					"    if (response.data && response.data.id && pm.request.url.path.includes('teams')) {",
+					"        pm.collectionVariables.set('team_id', response.data.id);",
+					"        console.log('✅ Team ID saved:', response.data.id);",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "team_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "request_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "friend_id",
+			"value": "2",
+			"type": "string"
+		}
+	]
+}

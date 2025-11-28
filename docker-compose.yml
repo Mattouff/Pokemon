@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: pokemon_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pokemon_battle
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pokemon-network
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pokemon_api
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: pokemon_battle
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      JWT_SECRET: your_super_secret_jwt_key_change_this_in_production
+      JWT_EXPIRES_IN: 1h
+      JWT_REFRESH_SECRET: your_super_secret_refresh_key_change_this_in_production
+      JWT_REFRESH_EXPIRES_IN: 7d
+      POKEAPI_BASE_URL: https://pokeapi.co/api/v2
+      WEATHER_API_KEY: ${WEATHER_API_KEY:-}
+      WEATHER_API_URL: https://api.openweathermap.org/data/2.5
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - pokemon-network
+    command: sh -c "npm run migrate:up && npm start"
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  pokemon-network:
+    driver: bridge
