@@ -1,16 +1,8 @@
 import { BattleModel } from '../models/battle.model';
-import { TeamModel } from '../models/team.model';
-import { TeamPokemonModel } from '../models/teamPokemon.model';
-import { FriendshipModel } from '../models/friendship.model';
-import { PokeAPIService } from './pokeapi.service';
-import { WeatherService } from './weather.service';
 import { DamageCalculator } from './damage.calculator';
-import { HackService } from './hack.service';
-import { CreateBattleDTO, BattleLog, BattleTurn, TurnAction, BattleResult } from '../types/battle.types';
-import { ValidationError } from '../types/errors.types';
+import { BattleLog, BattleTurn, TurnAction } from '../types/battle.types';
 import { Pokemon } from '../types/pokemon.types';
 import { WeatherCondition } from '../types/weather.types';
-import { HackAttempt } from '../types/hack.types';
 
 export class BattleService {
   static async getBattleHistory(userId: number, limit: number = 20): Promise<any[]> {
@@ -18,8 +10,6 @@ export class BattleService {
     
     return battles.map(battle => {
       const isAttacker = battle.attacker_id === userId;
-      const opponentId = isAttacker ? battle.defender_id : battle.attacker_id;
-      const userTeamId = isAttacker ? battle.attacker_team_id : battle.defender_team_id;
       
       const battleLog = typeof battle.battle_log === 'string' ? JSON.parse(battle.battle_log) : battle.battle_log;
       const turns = battleLog.turns || [];
@@ -69,7 +59,7 @@ export class BattleService {
     return await BattleModel.getUserStats(userId);
   }
 
-  private static simulateBattle(attackerPokemons: Pokemon[], defenderPokemons: Pokemon[], weatherCondition: WeatherCondition): BattleLog {
+  private static _simulateBattle(attackerPokemons: Pokemon[], defenderPokemons: Pokemon[], weatherCondition: WeatherCondition): BattleLog {
     const turns: BattleTurn[] = [];
     let attackerIndex = 0;
     let defenderIndex = 0;
