@@ -61,7 +61,7 @@ type BattleState = {
   is_your_turn: boolean;
   battle_logs: string[];
   is_finished?: boolean;
-  winner?: 'player' | 'opponent' | 'draw';
+  winner?: 'player' | 'opponent' | 'draw' | 'flee';
   turn_result?: TurnResult;
 };
 
