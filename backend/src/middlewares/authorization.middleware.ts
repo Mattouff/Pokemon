@@ -3,7 +3,7 @@ import { AuthRequest } from '../types/auth.types';
 import { ForbiddenError } from '../types/errors.types';
 
 export function authorize(...allowedRoles: string[]) {
-  return (req: Request, res: Response, next: NextFunction): void => {
+  return (req: Request, _res: Response, next: NextFunction): void => {
     try {
       const user = (req as AuthRequest).user;
 
@@ -23,7 +23,7 @@ export function authorize(...allowedRoles: string[]) {
 }
 
 export function authorizeOwnerOrAdmin(userIdParam: string = 'userId') {
-  return (req: Request, res: Response, next: NextFunction): void => {
+  return (req: Request, _res: Response, next: NextFunction): void => {
     try {
       const user = (req as AuthRequest).user;
 
