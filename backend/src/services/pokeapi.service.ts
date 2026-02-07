@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config';
-import { Pokemon, PokemonListResponse, PokeAPIResponse, PokemonStats, PokemonListItem } from '../types/pokemon.types';
+import { Pokemon, PokemonListResponse, PokeAPIResponse, PokemonStats } from '../types/pokemon.types';
 import { NotFoundError } from '../types/errors.types';
 
 class PokemonCache {
