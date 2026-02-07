@@ -1,7 +1,7 @@
 import { UserModel } from '../models/user.model';
 import { RefreshTokenModel } from '../models/refreshToken.model';
 import { RegisterDTO, LoginDTO, AuthTokens, UserPayload } from '../types/auth.types';
-import { ConflictError, UnauthorizedError, ValidationError } from '../types/errors.types';
+import { ConflictError, UnauthorizedError } from '../types/errors.types';
 import { hashPassword, comparePassword } from '../utils/password.utils';
 import {
   generateAccessToken,
