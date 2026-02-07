@@ -18,6 +18,8 @@ interface BattlePokemon {
     hp: number;
     attack: number;
     defense: number;
+    specialAttack: number;
+    specialDefense: number;
     speed: number;
   };
   current_hp: number;
@@ -83,7 +85,7 @@ export class InteractiveBattleService {
         playerPokemons.map(() => {
           const randomId = Math.floor(Math.random() * 151) + 1;
           return PokeAPIService.getPokemonWithMoves(randomId);
-        ))
+        })
       );
     } else {
       const opponentTeam = await TeamModel.getActiveTeam(opponentId);
@@ -622,8 +624,15 @@ export class InteractiveBattleService {
       id: pokemon.id,
       pokemon_id: pokemon.id,
       name: pokemon.name,
+      stats: {
+        hp: pokemon.stats.hp,
+        attack: pokemon.stats.attack,
+        defense: pokemon.stats.defense,
+        specialAttack: pokemon.stats.specialAttack,
+        specialDefense: pokemon.stats.specialDefense,
+        speed: pokemon.stats.speed
+      },
       types: [...pokemon.types], // Copie du tableau
-      stats: { ...pokemon.stats }, // Copie de l'objet
       current_hp: pokemon.stats.hp,
       max_hp: pokemon.stats.hp,
       sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`,
@@ -647,14 +656,7 @@ export class InteractiveBattleService {
       id: battlePokemon.pokemon_id,
       name: battlePokemon.name,
       types: battlePokemon.types,
-      stats: {
-        hp: battlePokemon.stats.hp,
-        attack: battlePokemon.stats.attack,
-        defense: battlePokemon.stats.defense,
-        speed: battlePokemon.stats.speed,
-        specialAttack: (battlePokemon.stats as any).specialAttack ?? 0,
-        specialDefense: (battlePokemon.stats as any).specialDefense ?? 0
-      },
+      stats: battlePokemon.stats,
       sprite: battlePokemon.sprite,
       sprites: {
         front_default: battlePokemon.sprite,
