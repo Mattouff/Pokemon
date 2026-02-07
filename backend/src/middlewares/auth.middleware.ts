@@ -7,7 +7,7 @@ import db from '../config/database';
 /**
  * Middleware d'authentification - Vérifie le token JWT
  */
-export async function authenticate(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function authenticate(req: Request, _res: Response, next: NextFunction): Promise<void> {
   try {
     const authHeader = req.headers.authorization;
     
@@ -37,7 +37,7 @@ export async function authenticate(req: Request, res: Response, next: NextFuncti
  * Middleware d'authentification optionnelle
  * N'échoue pas si le token est absent, mais le valide s'il est présent
  */
-export async function optionalAuthenticate(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function optionalAuthenticate(req: Request, _res: Response, next: NextFunction): Promise<void> {
   try {
     const authHeader = req.headers.authorization;
     
