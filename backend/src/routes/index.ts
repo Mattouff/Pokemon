@@ -47,7 +47,7 @@ router.use('/hacks', hackRoutes);
 /**
  * Route de santé
  */
-router.get('/health', (req, res) => {
+router.get('/health', (_req, res) => {
   res.status(200).json({
     success: true,
     message: 'API opérationnelle',
