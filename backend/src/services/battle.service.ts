@@ -59,7 +59,7 @@ export class BattleService {
     return await BattleModel.getUserStats(userId);
   }
 
-  private static _simulateBattle(attackerPokemons: Pokemon[], defenderPokemons: Pokemon[], weatherCondition: WeatherCondition): BattleLog {
+  static simulateBattle(attackerPokemons: Pokemon[], defenderPokemons: Pokemon[], weatherCondition: WeatherCondition): BattleLog {
     const turns: BattleTurn[] = [];
     let attackerIndex = 0;
     let defenderIndex = 0;
