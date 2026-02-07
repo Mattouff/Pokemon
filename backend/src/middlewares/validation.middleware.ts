@@ -8,7 +8,7 @@ import { validateData } from '../utils/validation.utils';
  * @param property - La propriété de la requête à valider ('body', 'query', 'params')
  */
 export function validate(schema: z.ZodSchema, property: 'body' | 'query' | 'params' = 'body') {
-  return (req: Request, res: Response, next: NextFunction): void => {
+  return (req: Request, _res: Response, next: NextFunction): void => {
     try {
       const validatedData = validateData(schema, req[property]);
       req[property] = validatedData;
