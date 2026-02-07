@@ -647,11 +647,21 @@ export class InteractiveBattleService {
       id: battlePokemon.pokemon_id,
       name: battlePokemon.name,
       types: battlePokemon.types,
-      stats: battlePokemon.stats,
+      stats: {
+        hp: battlePokemon.stats.hp,
+        attack: battlePokemon.stats.attack,
+        defense: battlePokemon.stats.defense,
+        speed: battlePokemon.stats.speed,
+        specialAttack: (battlePokemon.stats as any).specialAttack ?? 0,
+        specialDefense: (battlePokemon.stats as any).specialDefense ?? 0
+      },
+      sprite: battlePokemon.sprite,
       sprites: {
         front_default: battlePokemon.sprite,
         back_default: battlePokemon.sprite_back || battlePokemon.sprite
-      }
+      },
+      height: 0,
+      weight: 0
     } as Pokemon;
   }
 
