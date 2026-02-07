@@ -10,7 +10,7 @@ const submitHackSolutionSchema = z.object({
 });
 
 export class HackController {
-  static async getAllHacks(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async getAllHacks(_req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const hacks = await HackService.getAllHacks();
 
