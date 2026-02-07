@@ -1,6 +1,6 @@
 import { FriendshipModel } from '../models/friendship.model';
 import { UserModel } from '../models/user.model';
-import { SendFriendRequestDTO, UpdateFriendshipDTO, FriendshipStatus, FriendWithDetails } from '../types/friendship.types';
+import { SendFriendRequestDTO, FriendshipStatus, FriendWithDetails } from '../types/friendship.types';
 import { ConflictError, NotFoundError, ValidationError } from '../types/errors.types';
 
 export class FriendshipService {
