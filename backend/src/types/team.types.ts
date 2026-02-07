@@ -30,6 +30,16 @@ export interface AddPokemonDTO {
   nickname?: string;
 }
 
+export interface TeamPokemonWithDetails {
+  id: number;
+  pokemon_id: number;
+  name: string;
+  sprite: string;
+  types: string[];
+  position: number;
+  nickname: string | null;
+}
+
 export interface TeamWithPokemons extends Team {
-  pokemons: TeamPokemon[];
+  pokemons: (TeamPokemon | TeamPokemonWithDetails)[];
 }
